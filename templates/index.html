@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindCare – Mental Health Support & Calming Companion</title>
+    <meta name="description" content="MindCare is an empathetic, safe mental health support chatbot offering evidence-based coping strategies, guided breathing, grounding exercises, and 24/7 crisis resources.">
+    <meta name="keywords" content="mental health chatbot, anxiety support, stress relief, breathing exercises, crisis helpline, mindfulness">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2222%22>🌿</text></svg>">
+</head>
+<body class="theme-dark">
+    <!-- Background Ambient Glow Elements -->
+    <div class="ambient-glow glow-1" aria-hidden="true"></div>
+    <div class="ambient-glow glow-2" aria-hidden="true"></div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="chat-header" id="mainHeader">
+            <div class="brand-section">
+                <div class="brand-avatar" aria-hidden="true">
+                    <span class="avatar-icon">🌿</span>
+                    <span class="pulse-ring"></span>
+                </div>
+                <div class="brand-info">
+                    <h1 class="brand-title">MindCare</h1>
+                    <div class="status-indicator">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span class="status-text">Compassionate Support • Always Here</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-actions">
+                <button type="button" class="btn-action btn-breathe" id="btnOpenBreathing" title="Guided Breathing Exercise" aria-label="Start Guided Breathing">
+                    <span class="btn-icon">🫁</span>
+                    <span class="btn-label">Breathe</span>
+                </button>
+                <button type="button" class="btn-action btn-crisis" id="btnOpenCrisis" title="Emergency Crisis Contacts" aria-label="Emergency Resources">
+                    <span class="btn-icon">🆘</span>
+                    <span class="btn-label">Helplines</span>
+                </button>
+                <button type="button" class="btn-icon-only" id="btnThemeToggle" title="Toggle Theme" aria-label="Toggle dark/light theme">
+                    <span id="themeIcon">☀️</span>
+                </button>
+                <button type="button" class="btn-icon-only" id="btnClearChat" title="Clear Conversation" aria-label="Clear chat conversation">
+                    <span>🗑️</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mood Check-in Bar -->
+        <section class="mood-bar" id="moodSection" aria-label="Daily Mood Check-in">
+            <div class="mood-prompt">
+                <span class="sparkle-icon">✨</span>
+                <span>How are you feeling right now?</span>
+            </div>
+            <div class="mood-pills">
+                <button type="button" class="mood-pill" data-mood="Peaceful" aria-label="Mood: Peaceful">
+                    <span>😌 Peaceful</span>
+                </button>
+                <button type="button" class="mood-pill" data-mood="Anxious" aria-label="Mood: Anxious">
+                    <span>😰 Anxious</span>
+                </button>
+                <button type="button" class="mood-pill" data-mood="Overwhelmed" aria-label="Mood: Overwhelmed">
+                    <span>🌀 Overwhelmed</span>
+                </button>
+                <button type="button" class="mood-pill" data-mood="Down" aria-label="Mood: Down">
+                    <span>🌧️ Sad / Down</span>
+                </button>
+                <button type="button" class="mood-pill" data-mood="Grateful" aria-label="Mood: Grateful">
+                    <span>🌿 Grateful</span>
+                </button>
+            </div>
+            <div id="moodFeedback" class="mood-feedback" aria-live="polite"></div>
+        </section>
+
+        <!-- Chat Conversation Stream -->
+        <main class="chat-viewport" id="chatViewport" role="log" aria-live="polite">
+            <!-- Welcome Hero Card -->
+            <div class="welcome-card" id="welcomeCard">
+                <div class="welcome-icon">🌱</div>
+                <h2>Welcome to Your Safe Space</h2>
+                <p>
+                    I am MindCare, a gentle AI peer companion designed to help you decompress, navigate anxious moments, 
+                    and practice grounding techniques. You can share whatever is on your heart—there is no judgment here.
+                </p>
+                <div class="disclaimer-banner">
+                    <span class="info-badge">Important</span>
+                    <span>MindCare offers supportive peer listening and coping tools, not professional medical therapy. If you are in immediate danger, please use our 24/7 Helpline shortcut above.</span>
+                </div>
+
+                <div class="starter-prompts-title">Explore conversations or exercises:</div>
+                <div class="quick-prompts-grid">
+                    <button type="button" class="quick-prompt-btn" data-prompt="I am feeling very anxious and my heart is racing.">
+                        <span class="prompt-icon">🌊</span>
+                        <span>I'm feeling very anxious</span>
+                    </button>
+                    <button type="button" class="quick-prompt-btn" data-prompt="Can you guide me through the 5-4-3-2-1 grounding technique?">
+                        <span class="prompt-icon">⚓</span>
+                        <span>5-4-3-2-1 Grounding</span>
+                    </button>
+                    <button type="button" class="quick-prompt-btn" data-prompt="I'm feeling burned out and exhausted with work stress.">
+                        <span class="prompt-icon">🕯️</span>
+                        <span>Managing work burnout</span>
+                    </button>
+                    <button type="button" class="quick-prompt-btn" data-prompt="Can you share a comforting mindful affirmation?">
+                        <span class="prompt-icon">✨</span>
+                        <span>Daily positive affirmation</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Stream Container -->
+            <div class="messages-list" id="messagesList"></div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator" aria-hidden="true" style="display: none;">
+                <div class="typing-avatar">🌿</div>
+                <div class="typing-bubble">
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Input Control Footer -->
+        <footer class="chat-footer">
+            <div class="chat-input-wrapper">
+                <textarea 
+                    id="chatInput" 
+                    class="chat-input" 
+                    placeholder="Share what's on your mind... (Press Enter to send, Shift+Enter for newline)" 
+                    rows="1" 
+                    aria-label="Your message to MindCare"
+                    maxlength="1500"
+                ></textarea>
+                <button type="button" id="btnSend" class="btn-send" title="Send message" aria-label="Send message">
+                    <svg class="send-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+            <div class="footer-privacy-note">
+                <span>🔒 Private & Confidential session • Messages stored locally in SQLite</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Breathing Exercise Modal -->
+    <div class="modal-backdrop" id="breathingModal" role="dialog" aria-modal="true" aria-labelledby="breathingTitle" style="display: none;">
+        <div class="modal-card breathing-card">
+            <button type="button" class="modal-close" id="btnCloseBreathing" aria-label="Close breathing modal">✕</button>
+            <div class="modal-header">
+                <span class="modal-badge">Calm Your Nervous System</span>
+                <h3 id="breathingTitle">Box Breathing Guide</h3>
+                <p>Regulate your heart rate and release physical tension with mindful rhythmic breath.</p>
+            </div>
+
+            <div class="pacer-container">
+                <div class="pacer-circle" id="pacerCircle">
+                    <div class="pacer-inner">
+                        <span class="pacer-phase" id="pacerPhase">Get Ready</span>
+                        <span class="pacer-timer" id="pacerTimer">4</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pacer-controls">
+                <button type="button" class="btn-primary" id="btnTogglePacer">Start Session</button>
+                <div class="pacer-mode-selector">
+                    <button type="button" class="mode-btn active" data-mode="box">Box (4-4-4-4)</button>
+                    <button type="button" class="mode-btn" data-mode="478">4-7-8 Relax</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crisis Helpline Modal -->
+    <div class="modal-backdrop" id="crisisModal" role="dialog" aria-modal="true" aria-labelledby="crisisTitle" style="display: none;">
+        <div class="modal-card crisis-card">
+            <button type="button" class="modal-close" id="btnCloseCrisis" aria-label="Close crisis modal">✕</button>
+            <div class="crisis-icon">❤️‍🩹</div>
+            <h3 id="crisisTitle">Immediate Support & Crisis Helplines</h3>
+            <p class="crisis-intro">
+                You are not alone. Free, confidential support is available 24/7. Compassionate crisis counselors are ready to speak with you right now.
+            </p>
+
+            <div class="helpline-list">
+                <div class="helpline-item">
+                    <div class="helpline-region">🇺🇸 / 🇨🇦 United States & Canada</div>
+                    <div class="helpline-contact">
+                        <strong>Call or Text: <a href="tel:988" class="tel-link"><span class="highlight-number">988</span></a></strong>
+                        <span class="helpline-note">Suicide & Crisis Lifeline (24/7, Free, Confidential)</span>
+                    </div>
+                </div>
+                <div class="helpline-item">
+                    <div class="helpline-region">🇬🇧 United Kingdom</div>
+                    <div class="helpline-contact">
+                        <strong>Call: <a href="tel:111" class="tel-link"><span class="highlight-number">111</span></a></strong> or text <strong>SHOUT</strong> to <a href="sms:85258" class="tel-link"><span class="highlight-number">85258</span></a>
+                        <span class="helpline-note">NHS Mental Health Services & Crisis Text Line</span>
+                    </div>
+                </div>
+                <div class="helpline-item">
+                    <div class="helpline-region">🇮🇳 India</div>
+                    <div class="helpline-contact">
+                        <strong>Call: <a href="tel:112" class="tel-link"><span class="highlight-number">112</span></a></strong> (National Emergency) or <a href="tel:14416" class="tel-link"><strong>14416</strong></a> / <a href="tel:18008914416" class="tel-link"><strong>1800-891-4416</strong></a>
+                        <span class="helpline-note">Emergency Services (112) & Tele-MANAS Mental Health Helpline (24/7)</span>
+                    </div>
+                </div>
+                <div class="helpline-item">
+                    <div class="helpline-region">🌍 International / Anywhere Else</div>
+                    <div class="helpline-contact">
+                        <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" class="link-external">
+                            Visit findahelpline.com ↗
+                        </a>
+                        <span class="helpline-note">Find free, confidential crisis lines in 130+ countries</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer-note">
+                If you or someone you know is in immediate life-threatening danger, please call your local emergency service (like 911, 999, or 112) or go to the nearest emergency room.
+            </div>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
