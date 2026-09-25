@@ -121,6 +121,7 @@ class TestCompleteMindCareApp(unittest.TestCase):
             "I struggle with self-harm urges",
             "I want to hurt myself",
             "I want to end my life",
+            "I am going to die",
         ]
         for phrase in crisis_phrases:
             with self.subTest(phrase=phrase):

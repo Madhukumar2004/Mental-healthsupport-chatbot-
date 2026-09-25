@@ -67,6 +67,11 @@ class TestChatbotLogic(unittest.TestCase):
             "I'm better off dead",
             "I don't want to live anymore",
             "There is no reason to live",
+            "I am going to die",
+            "I'm going to die",
+            "going to die",
+            "gonna die",
+            "I feel like dying",
         ]
         for p in phrases:
             with self.subTest(phrase=p):

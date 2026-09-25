@@ -70,9 +70,11 @@ CRISIS_PATTERNS = {
     ],
     # 2. Wanting to die
     "wanting_to_die": [
-        r"\b(want\s+to\s+die|wanna\s+die|wanting\s+to\s+die)\b",
-        r"\b(wish\s+i\s+(were|was)\s+dead|wishing\s+i\s+(were|was)\s+dead|better\s+off\s+dead)\b",
-        r"\b(do\s*not\s+want\s+to\s+live|don'?t\s+want\s+to\s+live|don'?t\s+wanna\s+live|don'?t\s+want\s+to\s+wake\s+up|no\s+reason\s+to\s+live|nothing\s+to\s+live\s+for)\b",
+        r"\b(want\s+to\s+die|wanna\s+die|wanting\s+to\s+die|wish\s+to\s+die)\b",
+        r"\b(going\s+to\s+die|gonna\s+die|about\s+to\s+die|ready\s+to\s+die|will\s+die|should\s+just\s+die)\b",
+        r"\b(feel(ing)?\s+like\s+dying|thinking\s+of\s+dying)\b",
+        r"\b(wish\s+i\s+(were|was)\s+dead|wishing\s+i\s+(were|was)\s+dead|better\s+off\s+dead|rather\s+be\s+dead)\b",
+        r"\b(do\s*not\s+want\s+to\s+live|don'?t\s+want\s+to\s+live|don'?t\s+wanna\s+live|don'?t\s+want\s+to\s+wake\s+up|no\s+reason\s+to\s+live|nothing\s+to\s+live\s+for|done\s+with\s+life|tired\s+of\s+living|can'?t\s+go\s+on\s+living)\b",
     ],
     # 3. Killing oneself
     "killing_oneself": [
